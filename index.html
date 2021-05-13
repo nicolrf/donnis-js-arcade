@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+    <head>
+        <meta charset=utf-8 />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>JS Game Place</title>
+
+        <!-- bootstrap 4 -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- google fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Electrolize&family=Press+Start+2P&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <!-- firebase -->
+        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css"/>
+        <!-- my css -->
+        <link rel="stylesheet" href="styles/main.css">
+    </head>
+
+    <body>
+    	<div class="home p-2 float-left" id="home">	            	
+    		<img src="img/home.png">
+    	</div>
+        <div class="home p-2" id="suggestionBox">                    
+            <img src="img/sug-box2.png">
+        </div>
+
+    	<!-- /////// home screen - user info, game options -->
+        <div class="container" id="main-container">
+            <!-- header title-->
+            <header class="my-5 header">
+              <div class="text-center">
+               <h2>JS Game Place</h2>
+              </div>
+            </header>
+
+            <!-- /////// sign-in / sign-out -->
+             <div class="m-auto w-50 auth-area gray-border p-3" id="user-info">
+                <main class="main-auth-container ">
+                     <div class="text-left">
+                     	<div class="pl-3 pb-0" id="main-auth">
+                     		<!-- username display-->
+                        	<div id="usrname"><h4 class="mb-0 pb-3">Username: <span class="" id="name-info"> </span></h4>
+                        	</div>
+                        	<!-- email input -->
+                            <div class="d-none" id="email-section">
+                           		<label class="email-label mb-0">Email</label>
+                            	<input class="ml-0 mb-4" type="text" id="email" name="email" autocomplete="false"/>
+                            </div>
+                            <!-- password input -->
+                            <div class="d-none" id="pw-section">
+                            	<label class="password-label mb-0">Password</label>
+                            	<input class="ml-0 mb-4" type="password" id="password" name="password" autocomplete="false"/>
+                        	</div>
+                        </div>
+                        <!-- all buttons - signin, signup, & email verification(not being used atm) -->
+                        <div class="all-buttons mt-0">
+                       		<button disabled class="mt-0 btn btn-dark" id="signin" name="signin">Sign In </button>
+                        	<button class="mt-0 btn btn-dark" id="sign-up" name="signup">Sign Up</button>
+                        	<button class="mt-0 btn btn-dark d-none" disabled id="verify-email" name="verify-email">Email Verification</button>
+                        </div>
+                    </div>
+                </main>
+             </div>
+
+             <!--///// suggenstion box -->
+             <div class="container d-none" id="suggestions">
+               <div class="panel-group">
+                 <div class="panel panel-danger">
+                   <h3 class="pink text-center mt-0">Request New Games</h3>
+                   <div class="panel-body gray-border p-4 mt-2 mr-2 float-left">
+                     <form action="" id="message-form">
+                       <div class="form-group">
+                         <label>Suggestion Box:</label>
+                         <textarea id="message" type="text" class="form-control"></textarea>
+                       </div>
+                       <button class="button-blue-md">Post Request</button>
+                     </form>
+                   </div>
+                   <div class="panel-group w-50 float-left gray-border p-4 mt-2">
+                     <div class="panel yellow electrolize font-md">
+                       <label class="vote-box">Vote on New Games: </label>
+                       <div class="panel-body">
+                         <ul class="message-board">
+                         </ul>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+
+            <!-- ///// game selection -->
+            <div class="games-container m-5 p-3" id="games">
+                <h3 class="pb-4 text-center">Select a Game</h3>
+                <div class="yellow">
+                    <div class="row text-center">
+                        <div class="col">
+                            <button class="button-blue game-titles" id="guess">
+                                <h5>Guess Woof</h5>
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button class="button-blue game-titles" id="donni">
+                                <h5>Donni-saur</h5>
+                            </button>
+                        </div>
+                        <div class="col bk-gray">
+                            <button class="button-blue btn-secondary disabled game-titles" id="skate">
+                                <h5>SkateFree<br><span class=font-italic>Coming Soon</span></h5>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- home screen container end -->
+
+    	<!-- ///////******** games area ********/////// -->
+
+        <!-- /////// guess woof game selection screen -->
+        <div id="guesswoof" class="d-none">
+            <h1 class="text-center my-3 outline">Guess Woof Game</h1>
+            <div class="text-center" id="startSection">
+            	<!-- choose from either 1 or 2 player options -->
+            	<!-- click deck to pick random dog  -->
+                <label class="yellow">Pick a dog from the deck to start:</label><br>
+                <div>
+                	<p class="d-inline mx-5 font-md pink">Single Player</p>
+                	<p class="d-inline mx-5 font-md pink">Two Player</p>
+                </div>
+                <!-- card deck images -->
+                <div class="row w-50 m-auto">
+    	            <div class="col single-deck play-guess" id="choose-single">
+    	            	<img src="img/dog-pattern.png">
+    	            	<img src="img/dog-pattern.png">
+    	            	<img src="img/dog-pattern.png">
+    	            </div>
+    	            <div class="col multi-deck play-guess" id="choose-multi">
+    	            	<img src="img/dog-pattern.png">
+    	            	<img src="img/dog-pattern.png">
+    	            	<img src="img/dog-pattern.png">
+    	            </div>
+            	</div>
+            </div>
+
+            <!-- /////// main guess woof screen  -->
+            <div class="container full-board d-none">
+            	<div class="row mb-3 guess-bk p-5">
+            		<!-- the dog you selected randomly -->
+    	            <div id="dogDiv" class="col-4 font-md ml-5 float-left">
+    	                <img src="img/don-main.png" class="">
+    	                <p>Your dog is:</p>
+    	            </div>
+    	            <!-- all cards displayed here -->
+    	           	<div class="col" id="dogBoard">
+    	                <div class="row">
+    	                </div>
+    	            </div>
+                </div>
+
+                <div class="row">
+                	<!-- single player game (no chat feature) -->
+                	<!-- todo: make 'computer' player 2 -->
+                    <div class="col-6 single d-none my-3 ml-5 p-3 border ">
+                        <p class="electrolize font-lg bk-blue">Ask a question:</p>
+                        <!-- question -->
+                        <p class="electrolize font-md">
+                            <span class="yellow">"Does your dog have... <input type="text" id="askInput" name="ask" placeholder="hat">?"</span>
+                        </p>
+                        <!-- automatic response -->
+                        <div class="answers"></div>
+                        <button class="button-blue-sm" id="ask">Submit</button>
+                    </div>
+                    <!-- 2 player game -->
+                    <!-- todo: fix 2 player chat; user management -->
+                    <div class="col multi d-none">
+    	                <div id="chat" class="m-3 border pt-3"> 
+    	                	<p class="electrolize font-lg bk-blue mx-2">Ask a question:</p>
+    	                	<div id="messagediv">
+    	                		<ul id="messages" class="p-2"></ul>
+    	                	</div> 
+    	            	</div>
+                		<form id="send-message" class="multi d-none sender position-relative fixed-bottom text-right p-3 mr-5">
+                	  		<input id="chat-txt" type="text" />
+                	  		<button class="button-blue-sm" id="chat-btn" type="submit">Send</button>
+                		</form>  
+                	</div>
+                	<!-- guess the dog to win/lose the game -->
+                    <div class="col h-25 mx-5 mt-3 p-3 border">
+                    	<p class="electrolize font-lg bk-blue">Or guess the dog!</p>
+                        <input class="yellow font-md" type="text" id="finalInput" name="ask" placeholder="final answer">
+                        <button class="button-blue-sm" id="final">Submit</button>
+                        <div class="final"></div>
+                    </div>
+                    
+                    <!-- todo: keep score -->
+                    <!--  <div class="score-board">
+                    </div> -->
+    	        </div>
+    	    </div>
+    	</div><!-- end guess woof game -->
+    	
+    	<!-- /////// Donni-saur game  /////// -->
+        <div id="donnisaur" class="d-none">
+        	<div id="weather" class="">
+        		<h1 class="text-center my-5 pink outline">Donni-saur</h1>
+        		<h4 class="press-space yellow text-center">Press space to play</h4><br>
+        		<h1 class="text-center mt-5 pt- 5 black" id="over"></h1>
+        	</div>
+        	<div class="grid">
+        		<div id="taco">
+        		</div>
+        	    <div id="dino"></div>
+        	</div>
+
+        	<div class="score-board d-sm-block d-none p-3">
+        		<h4 class="points outline">Score: 0</h4>
+
+        	</div>
+        	<!-- display weather based on geolocation -->
+        	<div class="weather-box d-sm-block d-none p-3">
+        		<h4 id="location" class="pink outline mb-0">Current Weather</h4>
+        		<p id="mainWeather" class="outline font-md mb-0"></p>
+        		<p id="temp" class="outline font-md"></p>
+        		<div id="pic"></div>
+        	</div>
+        </div><!-- end donnisaur game -->
+
+        <!-- //////////////// for testing //////////////////// -->
+        <div class="electrolize for-testing white d-none">
+            <p>Signin Status:  <span class="" id="signin-status"></span></p>
+            <div class="white">Firebase auth <code>currentUser</code> object value:</div>
+            <pre class="white"><code id="account-info">null</code></pre>
+        </div>
+
+        <!-- //////////// scripts /////////-->
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+        <!-- Firebase SDK -->
+        <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/firebase/init.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
+       
+        <!-- keys -->
+        <script src="scripts/keys.js"></script>
+
+        <!-- my js -->
+        <script src="app.js"></script>
+        <script src="scripts/suggestion-box.js"></script>
+        <script src="scripts/guess-woof.js"></script>
+        <script src="scripts/donnisaur.js"></script>
+    </body>
+</html>
