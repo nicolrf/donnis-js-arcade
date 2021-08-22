@@ -66,4 +66,3 @@ node_modules/
 .env
 
 scripts/settings.js
-img/*
