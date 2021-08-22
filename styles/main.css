@@ -45,25 +45,9 @@ input:focus, :after {
   border-bottom: 2px solid #00f92a;
 }
 
-/********* general style classes ********/
-.panel-body {
-  margin-left: 10%;
-}
-
-.black {
-  color: black;
-}
-
+/**** general style classes ****/
 .white {
-  color:white;
-}
-
-.red {
-  color: red;
-}
-
-.blue {
-  color: blue;
+  color: white;
 }
 
 .green {
@@ -78,8 +62,17 @@ input:focus, :after {
   color: #fe1aa4 !important;
 }
 
+.bk-pink {
+  background-color: #fe1aa4 !important;
+}
+
 .bk-blue {
   background-color: darkblue;
+}
+
+.bk-green {
+  font-size:1em;
+  background-color: #2fff00;
 }
 
 .font-lg {
@@ -121,10 +114,6 @@ input:focus, :after {
   font-family: 'Electrolize', sans-serif;
 }
 
-#name-info {
-  color: #ccff00;
-}
-
 /* fun extras */
 .label-text:after {
   content: '';
@@ -146,7 +135,7 @@ input:focus, :after {
   }
 }
 
-/********* navigate styles ********/
+/**** navigate styles ****/
 .home img { 
   top: 2em;
   height: 70px; 
@@ -158,18 +147,9 @@ input:focus, :after {
 opacity: .5;
 }
 
-/********* suggestion box styles ********/
-.vote-box {
-  font-size: .8em;
-}
-
-li {
-  list-style: none;
-}
-
-/********* guess woof styles ********/
+/**** guess woof styles ****/
 #dogBoard {
-    margin-right: 30px;
+    margin-left: 30px;
     font-family: 'Electrolize', sans-serif;
     color: #2fff00 !important;
     font-size: 1.2em;
@@ -191,147 +171,91 @@ li {
     max-width: 100%;
 }
 
-#chat {
-  height: 300px;
-  width: 400px;
-  overflow-y: auto;
-}
-
-#messageDiv {
-  height: 250px;
-  width: 400px;
-  overflow: auto;
-  background-color: blue;
-}
-
 .guess-bk {
   background-color: #00a12b;
   border-radius: 5px;
   border: 2px solid lightgray;
 }
 
-.single-deck { 
-  height: 50px; 
-  width: 250px; 
-  margin: 2rem auto 0;
+.play-guess { 
+  margin: 2rem auto;
   position: relative; 
 }
 
-.single-deck img { 
+.play-guess img { 
   position: absolute; 
-  /*left: 2%; */
-  width: 100px; 
-  height: 150px; 
+  left: 43%; 
+  width: 10em; 
   border: 2px solid #ffe; 
   border-radius: 5px;
   box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.2); 
   transform-origin: center 400px; 
   transition: all .6s linear; 
 }
-.single-deck img:first-child { 
+.play-guess img:first-child { 
   transform: rotate(2deg);  
 }
-.single-deck img:last-child { 
+.play-guess img:last-child { 
   transform: rotate(-2deg); 
 }
-.single-deck:hover img:first-child { 
-  transform: rotate(7deg); 
+.play-guess:hover img:first-child { 
+  transform: rotate(8deg); 
 }
-.single-deck:hover img:last-child { 
-  transform: rotate(-7deg);  
-}
-
-.multi-deck { 
-  height: 50px; 
-  width: 200px; 
-  margin: 2rem auto 0;
-  position: relative;
-}
-.multi-deck img { 
-  position: absolute; 
-  left: 20%; 
-  width: 100px; 
-  height: 150px; 
-  border: 2px solid #ffe; 
-  border-radius: 5px;
-  box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.2); 
-  transform-origin: center 400px; 
-  transition: all .6s linear; 
-}
-.multi-deck img:first-child { 
-  transform: rotate(2deg);  
-}
-.multi-deck img:last-child { 
-  transform: rotate(-2deg); 
-}
-.multi-deck:hover img:first-child { 
-  transform: rotate(7deg); 
-}
-.multi-deck:hover img:last-child { 
-  transform: rotate(-7deg);  
+.play-guess:hover img:last-child { 
+  transform: rotate(-8deg);  
 }
 
 .board-image {
     width: 175px;
-    max-width: 100%;
-    height: 100%;
+    max-width: 90%;
     border: 1px solid white;
 }
 
-.sender {
-  background-color: black;
-}
-
-.from-msg {
-  color: white;
-  font-size: 1.2em;
-  border-radius: 5px;
-  float: right;
-}
-
-.to-msg {
-  color: white;
-  font-size: 1.2em;
-  border-radius: 5px;
-  float: left;
-}
-
-.from-usr {
-  border-radius: 5px;
-  border: 2px solid red;
-}
-
-.to-usr {
-  border-radius: 5px;
-  border: 2px solid blue;
-}
-
 .not-it {
-  content: url('/img/dog-pattern.png');
+  content: url('../img/dog-pattern.png')
 }
 
-/********* donnisaur styles ********/
-#dino {
-    position: absolute;
+/**** donnisaur styles ****/
+#donnisaur {
+  position: relative;
+  height: 90%;
+  width: 100%;
+  bottom: 0;
+}
+
+#donniRex {
+    position: fixed;
     left: 10px;
     bottom: 0px;
     width: 100px;
-    height: 80px;
-    background-image: url('/img/donsaurpix.png');
+    height: 100px;
+    background-image: url('../img/donsaurpix.png');
+}
+
+.clickdon {
+  font-size: 1em;
+  position: absolute;
+  left: 100px;
+}
+
+.over {
+  top: 8em;
+  position: absolute;
+  width: 100%;
+  margin: auto;
 }
 
 .hurdle {
-    position: absolute;
+    position: fixed;
     width: 60px;
     height: 50px;
-    background-image: url('/img/fence.png');
+    background-image: url('../img/fence.png');
     bottom: 0px;
 }
 
 .weather-box {
   width: 250px;
   float: right;
-  position: absolute;
   top: 1em;
   right: 1em;
   background-color: black;
@@ -342,7 +266,6 @@ li {
 
 .score-board {
   width: 200px;
-  position: absolute;
   top: 1em;
   right: 280px;
   background-color: black;
@@ -352,41 +275,41 @@ li {
 }
 
 .weather-clear {
-  position: absolute;
-  bottom: 0px;
-  background-image: url('/img/clear3.png');
+  position: fixed;
+  background-size: cover;
+  background-image: url('../img/clear3.png');
   background-repeat: repeat-x !important;
   width: 100%;
-  height: 90%;
+  height: 100%;
+  z-index: -2000;
   bottom: 0;
 }
 
 .weather-clouds {
-  position: absolute;
-  bottom: 0px;
-  background-image: url('/img/clouds1.png');
+  position: fixed;
+  background-image: url('../img/clouds1.png');
   background-repeat: repeat-x !important;
   width: 100%;
+  background-size: cover;
   height: 100%;
   bottom: 0;
   z-index: -2000;
 }
 
 .weather-rain {
-  position: absolute;
-  bottom: 0px;
-  background-image: url('/img/rain3.png');
+  position: fixed;
+  background-image: url('../img/rain3.png');
   background-repeat: repeat-x !important;
   width: 100%;
-  height: 100%;
+  height: 110%;
+  /*background-size: cover;*/
   bottom: 0;
   z-index: -2000;
 }
 
 .weather-snow {
   position: absolute;
-  bottom: 0px;
-  background-image: url('/img/snow.png');
+  background-image: url('../img/snow.png');
   background-repeat: repeat !important;
   width: 100%;
   height: 100%;
@@ -395,15 +318,10 @@ li {
 }
 
 #taco img {
-    top: 300px;
+    top: 125px;
     left: 10px;
-    position: relative;
+    position: absolute;
 }
-
-/*.tacos {
-    top: 5em;
-    position: relative;
-}*/
 
 .taco-score {
   top: 30px;
@@ -412,4 +330,3 @@ li {
   width: 58px;
 
 }
-
