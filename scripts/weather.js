@@ -23,6 +23,7 @@
               response.name, 
               response.weather[0].main, 
               response.weather[0].icon);
+              $('#weatherSection').removeClass('d-none');
         },
         error: function() {
           apiError();
