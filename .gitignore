@@ -66,3 +66,5 @@ node_modules/
 .env
 
 scripts/settings.js
+.gitsecret/keys/random_seed
+!*.secret
