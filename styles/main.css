@@ -222,6 +222,10 @@ input:focus, :after {
   border: 1px solid white;
 }
 
+.guess-guide {
+  line-height: 1;
+}
+
 .not-it {
   content: url('../img/dog-pattern.png')
 }
