@@ -1,4 +1,3 @@
-
 body {
   background-color: black;
 }
@@ -144,15 +143,27 @@ input:focus, :after {
 }
 
 .home img:hover { 
-opacity: .5;
+  opacity: .5;
+}
+
+.circular {
+  width: 125px;
+  height: 125px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid white; 
+}
+
+.intro-image {
+  width: 175px;
 }
 
 /**** guess woof styles ****/
 #dogBoard {
-    margin-left: 30px;
-    font-family: 'Electrolize', sans-serif;
-    color: #2fff00 !important;
-    font-size: 1.2em;
+  margin-left: 30px;
+  font-family: 'Electrolize', sans-serif;
+  color: #2fff00 !important;
+  font-size: 1.2em;
 }
 
 #dogDiv {
@@ -166,9 +177,9 @@ opacity: .5;
   border-radius: 5px;
 }
 
-#askInput {
-    width: 400px;
-    max-width: 100%;
+#guessInput {
+  width: 400px;
+  max-width: 100%;
 }
 
 .guess-bk {
@@ -206,9 +217,9 @@ opacity: .5;
 }
 
 .board-image {
-    width: 175px;
-    max-width: 90%;
-    border: 1px solid white;
+  width: 175px;
+  max-width: 90%;
+  border: 1px solid white;
 }
 
 .not-it {
@@ -224,12 +235,12 @@ opacity: .5;
 }
 
 #donniRex {
-    position: fixed;
-    left: 10px;
-    bottom: 0px;
-    width: 100px;
-    height: 100px;
-    background-image: url('../img/donsaurpix.png');
+  position: fixed;
+  left: 10px;
+  bottom: 0px;
+  width: 100px;
+  height: 100px;
+  background-image: url('../img/donsaurpix.png');
 }
 
 .clickdon {
@@ -246,11 +257,11 @@ opacity: .5;
 }
 
 .hurdle {
-    position: fixed;
-    width: 60px;
-    height: 50px;
-    background-image: url('../img/fence.png');
-    bottom: 0px;
+  position: fixed;
+  width: 60px;
+  height: 50px;
+  background-image: url('../img/fence.png');
+  bottom: 0px;
 }
 
 .weather-box {
@@ -318,9 +329,9 @@ opacity: .5;
 }
 
 #taco img {
-    top: 125px;
-    left: 10px;
-    position: absolute;
+  top: 125px;
+  left: 10px;
+  position: absolute;
 }
 
 .taco-score {
@@ -328,5 +339,4 @@ opacity: .5;
   left: 75px;
   position: absolute;
   width: 58px;
-
 }

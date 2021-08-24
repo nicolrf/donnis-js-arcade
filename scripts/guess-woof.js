@@ -1,110 +1,130 @@
 ////// guess woof game ///////////
-const $dogBoard = $('#dogBoard');
-const $dogBoardRow = $("#dogBoard .row");
-const $startSection = $("#startSection");
-const $startButton = $('.play-guess');
-const $askButton = $("#ask");
-const $finalButton = $("#final");
-const $singlePlayerDisplay = $('.single');
-const $guessForm = $('.guess-form');
-
 let $finalResponse = $('.final');
 let $winOrLoseDisplay = $('.guess-bk');
-let $askInput = $("#askInput");
+let $guessInput = $("#guessInput");
 let $finalInput = $("#finalInput");
 let playerOneDog = '';
 let secretDog = '';
 // let dogsPlayerTwo = [];
+$(document).ready(function () {
 
-var Dog = function(name, imag, chars) {
-    this.name = name;
-    this.imag = imag;
-    this.chars = chars;
-}
-var dogHarry = new Dog('Harry','harry.png', ['glasses', 'tie']);
-var dogLarry = new Dog('Larry','larry.png', ['hat', 'shoes', 'sneakers', 'cap']);
-var dogBarry = new Dog('Barry','barry.png', ['mushtache', 'hat', 'hair']);
-var dogDonni = new Dog('Donni','donni.png', ['hat', 'crown']);
-var dogJerry = new Dog('Jerry','jerry.png', ['hat', 'cap']);
-var dogPerry = new Dog('Perry','perry.png', ['glasses', 'sunglasses', 'shoes', 'boots']);
-
-let dogsAry = [dogHarry, dogLarry, dogBarry, dogDonni, dogJerry, dogPerry];
-
-$startButton.on('click', function(players){
-    let $fullBoard = $('.full-board')
-    /// if single player, show question form, otherwise show chat (todo)
-    if (this.id == 'choose-deck') {
-        $singlePlayerDisplay.removeClass('d-none');
+    var Dog = function(name, imag, chars) {
+        this.name = name;
+        this.imag = imag;
+        this.chars = chars;
     }
+    var dogHarry = new Dog('Harry','harry.png', ['glasses', 'tie']);
+    var dogLarry = new Dog('Larry','larry.png', ['hat', 'shoes', 'sneakers', 'cap']);
+    var dogBarry = new Dog('Barry','barry.png', ['mustache', 'hat', 'hair']);
+    var dogDonni = new Dog('Donni','donni.png', ['hat', 'crown']);
+    var dogJerry = new Dog('Jerry','jerry.png', ['hat', 'cap']);
+    var dogPerry = new Dog('Perry','perry.png', ['glasses', 'sunglasses', 'shoes', 'boots']);
 
-    let randoDog = Math.floor(Math.random() * dogsAry.length);
-    playerOneDog = dogsAry[randoDog];
-    // return array minus player one's selection (2player todo)
-    let dogsFiltered = dogsAry.filter(function( obj ) {
-        return obj.name !== playerOneDog.name;
+    let dogsAry = [dogHarry, dogLarry, dogBarry, dogDonni, dogJerry, dogPerry];
+
+    $('.play-guess').on('click', function(players){
+        let $fullBoard = $('.full-board')
+        /// if single player, show question form, otherwise show chat (todo)
+        if (this.id == 'choose-deck') {
+            $('.single').removeClass('d-none');
+        }
+        let randoDog = Math.floor(Math.random() * dogsAry.length);
+        playerOneDog = dogsAry[randoDog];
+        // return array minus player one's selection (2player todo)
+        let dogsFiltered = dogsAry.filter(function( obj ) {
+            return obj.name !== playerOneDog.name;
+        });
+        let randoDogTwo = Math.floor(Math.random() * dogsFiltered.length);
+        // assign secret dog from the filtered array
+        secretDog = dogsFiltered[randoDogTwo];
+        dogsAryPlayerTwo = dogsFiltered;
+        // go from selection screen to actual game
+        $("#startSection").addClass('d-none');
+        $fullBoard.removeClass('d-none');
+        console.log(`The secret dog is: ${secretDog.name}`);
     });
 
-    let randoDogTwo = Math.floor(Math.random() * dogsFiltered.length);
-    // assign secret dog from the filtered array
-    secretDog = dogsFiltered[randoDogTwo];
-    dogsAryPlayerTwo = dogsFiltered;
-    // go from selection screen to actual game
-    $startSection.addClass('d-none');
-    $fullBoard.removeClass('d-none');
-    console.log(`The secret dog is: ${secretDog.name}`);
-});
+    // todo refactor
+    $("#hat").on('click', function(){
+        let guessInput = 'hat';
+        $guessInput.val('');
+        guessButtons(guessInput);
+    });
 
-$askButton.on('click', function(){
-    let $answers = $('.answers');
-    let askInput = $askInput.val();
-    $askInput.val('');
-    let stringMatch = '';
-    let result = '';
-    let string = '';
+    $("#shoes").on('click', function(){
+        let guessInput = 'shoes';
+        $guessInput.val('');
+        guessButtons(guessInput);
+    });
 
-    let ary = [];
-    ary.push(secretDog.chars);
-    ary.forEach (function(x) {
-        console.log(x);
-        string = askInput.toLowerCase();
-        console.log(`array: ${ary} input: ${string}`);
-    })
+    $("#tie").on('click', function(){
+        let guessInput = 'tie';
+        $guessInput.val('');
+        guessButtons(guessInput);
+    });
 
-    if (secretDog.chars.includes(string)) {
-        console.log(`yes ${string}`);
-        $answers.html(`<p class='pink'>Woof! The dog has a ${string}</p>`);
-    } else {
-        console.log(`no ${askInput}`);
-        $answers.html(`<p class='pink'>Nope, no ${askInput}</p>`);
+    $("#glasses").on('click', function(){
+        let guessInput = 'glasses';
+        $guessInput.val('');
+        guessButtons(guessInput);
+    });
+
+    $("#mustache").on('click', function(){
+        let guessInput = 'mustache';
+        $guessInput.val('');
+        guessButtons(guessInput);
+    });
+
+    // todo: use regex, improve guessing 
+    function guessButtons(guess) {
+        console.log(`guess called:  ${guess}`);
+        let $answers = $('.answers');
+        let ary = [];
+        ary.push(secretDog.chars);
+        ary.forEach (function(x) {
+            console.log(x);
+            console.log(`array: ${ary} input: ${guess}`);
+        })
+        if (secretDog.chars.includes(guess)) {
+            console.log(`yes ${guess}`);
+            let a = '';
+            if (['hat','mustache','tie'].includes(guess)) {
+                a = 'a';
+            }
+            $answers.html(`<p class='pink'>Woof! Your dog has ${a} ${guess}</p>`);
+        } else {
+            console.log(`no ${guess}`);
+            $answers.html(`<p class='pink'>Nope, no ${guess}</p>`);
+        }
     }
-});
 
-// if your final guess is right you lose automatically. else win
-$finalButton.on('click', function(){
-    finalInput = $finalInput.val().toLowerCase();
-    answer = secretDog.name.toLowerCase();
-    $finalInput.val('');
-    if (finalInput == answer) {
-        $finalResponse.html(`<p class='pink'>${finalInput} is correct! You win!</p>`);
-        let winlose = `<div class='m-auto'><h3>You win!!!!</h3></div>`;
-        $winOrLoseDisplay.html(winlose).css('height', '300px').removeClass('guess-bk');
+    // if your final guess is right you lose automatically. else win
+    $("#final").on('click', function(){
+        finalInput = $finalInput.val().toLowerCase();
+        answer = secretDog.name.toLowerCase();
+        $finalInput.val('');
+        if (finalInput == answer) {
+            $finalResponse.html(`<p class='pink'>${finalInput} is correct! You win!</p>`);
+            let winlose = `<div class='m-auto'><h3>You win!!!!</h3></div>`;
+            $winOrLoseDisplay.html(winlose).css('height', '300px').removeClass('guess-bk');
+        } else {
+            $finalResponse.html(`<p class='pink'>Nope, it's not ${finalInput}</p>`);
+            let winlose = `<div class='m-auto'><h3>Game Over :(</h3></div>`;
+            $winOrLoseDisplay.html(winlose).css('height', '300px').removeClass('guess-bk');
+        }
+        $('.guess-form').addClass('d-none');
+    });
 
-    } else {
-        $finalResponse.html(`<p class='pink'>Nope, it's not ${finalInput}</p>`);
-        let winlose = `<div class='m-auto'><h3>Game Over :(</h3></div>`;
-        $winOrLoseDisplay.html(winlose).css('height', '300px').removeClass('guess-bk');
+    // display dog cards randomly on the dogboard
+    function shuffleDogs() {
+        for (var i = 0; i < dogsAry.length; i++) {
+            $("#dogBoard .row").append(`<div class='col-6 col-md-4 text-center my-3'><img class='board-image rounded' src='img/${dogsAry[i].imag} '></div>`);
+        }
     }
-    $guessForm.addClass('d-none');
+    shuffleDogs();
+    // click card to flip over if you think it's not the answer
+    $('#dogBoard').on('click', '.board-image', function(){
+        $(this).toggleClass('not-it');
+    });
 });
-
-// display dog cards randomly on the dogboard
-function shuffleDogs() {
-    for (var i = 0; i < dogsAry.length; i++) {
-        $dogBoardRow.append(`<div class='col-4 text-center my-3'><img class='board-image rounded' src='img/${dogsAry[i].imag} '></div>`);
-    }
-}
-shuffleDogs();
-// click card to flip over if you think it's not the answer
-$dogBoard.on('click', '.board-image', function(){
-    $(this).toggleClass('not-it');
-});
+    

@@ -3,11 +3,6 @@ function playDonnisaur() {
     const $donniRex = $('#donniRex');
     const donniarea = document.querySelector('.donniarea');
     const over = $('#over');
-    const $taco = $('#taco');
-    const $points = $('.points');
-    const $body = $('body');
-    const $weather = $('#weather');
-    const $weatherSection = $('#weatherSection')
     let isJumping = false;
     let isMoving = false;
     let backdown = .9;
@@ -73,7 +68,6 @@ function playDonnisaur() {
         }
         donniarea.appendChild(hurdle);
         hurdle.style.left = hurdlePosition + 'px';
-        // console.log('hurdle pos: ' + hurdlePosition + ' dondon pos: ' + donniPosition);
 
         let setTimer = setInterval(function() {
             // if donni and hurdle are in the same place at same time, end game
@@ -82,9 +76,9 @@ function playDonnisaur() {
                 over.html('Game Over');
                 over.removeClass('d-none');
                 over.addClass('over');
-                $weatherSection.addClass('d-none');
-                $playagainButton.removeClass('d-none');
-                $playagainButton.addClass('d-block');
+                $('#weatherSection').addClass('d-none');
+                // $playagainButton.removeClass('d-none');
+                // $playagainButton.addClass('d-block');
                 gameOver = true;
                 // everything disappears at gameover
                 while (donniarea.firstChild) {
@@ -93,8 +87,8 @@ function playDonnisaur() {
             // keep score - if hurdle comes and donni doesnt touch it, add points
             } else if (hurdlePosition > 0 && hurdlePosition < 60 && donniPosition > 60) {
                 score++;
-                $taco.html(`<img class="tacos" src="img/taco.png">`);
-                $points.html(`<h4 class="outline pink">Score:<span class="green"> ${score}</span</h4><img class="taco-score" src="img/taco.png">`)
+                $('#taco').html(`<img class="tacos" src="img/taco.png">`);
+                $('.points').html(`<h4 class="outline pink">Score:<span class="green"> ${score}</span</h4><img class="taco-score" src="img/taco.png">`)
                 $('#taco img').fadeTo("slow", 0.0);
             }
             // increase this number to speed up hurdles
@@ -127,8 +121,7 @@ function playDonnisaur() {
             setTimeout(makeHurdles, randoTime);
         }
         // console.log(myWeather);
-        $body.css('background-color', `${skyColor}`);
-        $weather.addClass(`${skyImage}`);
+        $('body').css('background-color', `${skyColor}`);
+        $('#weather').addClass(`${skyImage}`);
     }
 }
-

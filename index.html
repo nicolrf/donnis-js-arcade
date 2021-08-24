@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
     <head>
         <meta charset=utf-8 />
@@ -19,17 +18,19 @@
             <div class="home p-2 float-left" id="home">
                 <img src="img/home.png">
             </div>
-            <!-- <button class="d-none m-2 p-4 mt-3 w-25 m-auto pink bk-green" id="playagain"><h5>Play Again</h5></button> -->
+            <!-- todo: <button class="d-none m-2 p-4 mt-3 w-25 m-auto pink bk-green" id="playagain"><h5>Play Again</h5></button> -->
         </div>
-
         <div class="container" id="main-container">
             <!-- header title-->
-            <header class="my-5 header">
-              <div class="text-center">
-               <h2>Welcome to Donni's JS Arcade</h2>
-              </div>
+            <header class="mt-5 mb-3 header">
+                <div class="text-center">
+                    <h2 class="mb-4">Welcome to Donni's JS Arcade</h2>
+                    <div class="circular m-auto">
+                        <img class="rounded intro-image" src="img/donni_apple.jpg" alt="Donni with apples">
+                    </div>
+                    <h5 class="yellow electrolize mt-3">Hi I'm Donni, Nicole's dog, <br>and this is my arcade.<br>Hope you have fun :)</h5>
+                </div>
             </header>
-            
             <!-- /// game selection -->
             <div class="games-container m-4 p-3 pb-5 gray-border" id="games">
                 <h3 class="pb-4 text-center">Select a Game</h3>
@@ -91,11 +92,16 @@
                         <p class="electrolize font-lg bk-blue">Ask a question:</p>
                         <!-- question -->
                         <p class="electrolize font-md">
-                            <span class="yellow">"Does your dog have... <input type="text" id="askInput" name="ask" placeholder="hat">?"</span>
+                            <p class="yellow">"Does your dog have... </p>
+                                <button class="button-blue-sm" id="shoes">shoes</button>
+                                <button class="button-blue-sm" id="hat">hat</button>
+                                <button class="button-blue-sm" id="tie">tie</button>
+                                <button class="button-blue-sm" id="glasses">glasses</button>
+                                <button class="button-blue-sm" id="mustache">mustache</button>
+                            <!-- </span> -->
                         </p>
                         <!-- automatic response -->
                         <div class="answers"></div>
-                        <button class="button-blue-sm" id="ask">Submit</button>
                     </div>
                     <!-- guess the dog to win/lose the game -->
                     <div class="col-10 col-lg-4 h-25 mx-5 mt-3 p-3 border">
@@ -116,6 +122,7 @@
                 <h4 class="points outline">Score: 0</h4>
             </div>
             <!-- display weather based on geolocation -->
+            <!-- todo: launch site with different host to use keys -->
             <div id="weatherSection"class="float-right d-none">
                 <div class="weather-box d-sm-block d-none p-3">
                     <h4 id="location" class="pink outline mb-0">Current Weather</h4>
