@@ -60,12 +60,12 @@ $(document).ready(function () {
     // response to guess input
     function guessButtons(guess) {
         let $answers = $('.answers');
-        let ary = [];
-        ary.push(secretDog.chars);
-        ary.forEach (function(x) {
-            console.log(x);
-            console.log(`array: ${ary} input: ${guess}`);
-        })
+        // let ary = [];
+        // ary.push(secretDog.chars);
+        // ary.forEach (function(x) {
+        //     console.log(x);
+        //     console.log(`array: ${ary} input: ${guess}`);
+        // })
         if (secretDog.chars.includes(guess)) {
             console.log(`yes ${guess}`);
             let a = '';
@@ -85,12 +85,10 @@ $(document).ready(function () {
         answer = secretDog.name.toLowerCase();
         $finalInput.val('');
         if (finalInput == answer) {
-            $finalResponse.html(`<p class='pink'>${finalInput} is correct! You win!</p>`);
-            let winlose = `<div class='m-auto'><h3>You win!!!!</h3></div>`;
+            let winlose = `<div class='m-auto'><h3>${secretDog.name} is correct! You win!!!!</h3></div>`;
             $winOrLoseDisplay.html(winlose).css('height', '300px').removeClass('guess-bk');
         } else {
-            $finalResponse.html(`<p class='pink'>Nope, it's not ${finalInput}</p>`);
-            let winlose = `<div class='m-auto'><h3>Game Over :(</h3></div>`;
+            let winlose = `<div class='m-auto'><h3>Nope, it's not ${finalInput}.<br>The correct dog was ${secretDog.name}.<br> Game Over :(</h3></div>`;
             $winOrLoseDisplay.html(winlose).css('height', '300px').removeClass('guess-bk');
         }
         $('.guess-form').addClass('d-none');
