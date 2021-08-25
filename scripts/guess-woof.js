@@ -1,18 +1,20 @@
 ////// guess woof game ///////////
-let $finalResponse = $('.final');
-let $winOrLoseDisplay = $('.guess-bk');
-let $guessInput = $("#guessInput");
-let $finalInput = $("#finalInput");
-let playerOneDog = '';
-let secretDog = '';
-// let dogsPlayerTwo = [];
 $(document).ready(function () {
-
+    let $finalResponse = $('.final');
+    let $winOrLoseDisplay = $('.guess-bk');
+    let $guessInput = $("#guessInput");
+    let $finalInput = $("#finalInput");
+    let playerOneDog = '';
+    let secretDog = '';
+    // let dogsPlayerTwo = [];
+    
     var Dog = function(name, imag, chars) {
         this.name = name;
         this.imag = imag;
         this.chars = chars;
     }
+    // todo: use regex, improve guessing 
+    // keep arrays for possible use with text input/regex
     var dogHarry = new Dog('Harry','harry.png', ['glasses', 'tie']);
     var dogLarry = new Dog('Larry','larry.png', ['hat', 'shoes', 'sneakers', 'cap']);
     var dogBarry = new Dog('Barry','barry.png', ['mustache', 'hat', 'hair']);
@@ -44,40 +46,19 @@ $(document).ready(function () {
         console.log(`The secret dog is: ${secretDog.name}`);
     });
 
-    // todo refactor
-    $("#hat").on('click', function(){
-        let guessInput = 'hat';
-        $guessInput.val('');
-        guessButtons(guessInput);
-    });
+    // click function for guess buttons
+    const guessOptions = document.querySelectorAll("[data-guess]");
+    guessOptions.forEach((option) => {
+        option.addEventListener("click", (event) => {
+          event.preventDefault();
+          const {guess} = option.dataset;
+          console.log(guess);
+          guessButtons(guess);
+        });
+    })
 
-    $("#shoes").on('click', function(){
-        let guessInput = 'shoes';
-        $guessInput.val('');
-        guessButtons(guessInput);
-    });
-
-    $("#tie").on('click', function(){
-        let guessInput = 'tie';
-        $guessInput.val('');
-        guessButtons(guessInput);
-    });
-
-    $("#glasses").on('click', function(){
-        let guessInput = 'glasses';
-        $guessInput.val('');
-        guessButtons(guessInput);
-    });
-
-    $("#mustache").on('click', function(){
-        let guessInput = 'mustache';
-        $guessInput.val('');
-        guessButtons(guessInput);
-    });
-
-    // todo: use regex, improve guessing 
+    // response to guess input
     function guessButtons(guess) {
-        console.log(`guess called:  ${guess}`);
         let $answers = $('.answers');
         let ary = [];
         ary.push(secretDog.chars);
@@ -98,7 +79,7 @@ $(document).ready(function () {
         }
     }
 
-    // if your final guess is right you lose automatically. else win
+    // if your guess is wrong you lose automatically. else win
     $("#final").on('click', function(){
         finalInput = $finalInput.val().toLowerCase();
         answer = secretDog.name.toLowerCase();

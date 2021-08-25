@@ -7,7 +7,12 @@ function playDonnisaur() {
     let isMoving = false;
     let backdown = .9;
     let gameOver = false;
+    //weather backgrounds
+    let myLoc = '';
+    let myWeather = '';
+    let myTemp = '';
 
+    //click donni to start and to jump
     document.getElementById('donniRex').onclick = function(e){
         console.log('pressed');
         $('#titlesaur').addClass('d-none');
