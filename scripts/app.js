@@ -5,7 +5,7 @@ $(document).ready(function () {
     const $home = $('#home');
     const $guesswoof = $('#guesswoof');
     const $donnisaur = $('#donnisaur');
-    
+
     // nav buttons
     $home.on('click', function() {
         location.reload();
@@ -24,7 +24,7 @@ $(document).ready(function () {
         console.log('donnisaur game selected');
         $mainContainer.addClass('d-none');
         $donnisaur.removeClass('d-none');
-        $('#clickDon').html('Click DonniSaur');
+        $('#clickDon').html('Click DonniSaur to start and to jump');
         playDonnisaur();
     });
 });

@@ -2,7 +2,7 @@
 function playDonnisaur() {
     const $donniRex = $('#donniRex');
     const donniarea = document.querySelector('.donniarea');
-    const over = $('#over');
+    const isOver = $('#over');
     let isJumping = false;
     let isMoving = false;
     let backdown = .9;
@@ -11,6 +11,31 @@ function playDonnisaur() {
     let myLoc = '';
     let myWeather = '';
     let myTemp = '';
+    var skyColor;
+    var skyImage;
+
+    // change background based on weather. 
+    // default to 'Clear' if value missing (todo: keys)
+    switch(myWeather) {
+        case 'Clouds':
+            skyColor = 'blue';
+            skyImage = 'weather-clouds';
+            break;
+        case 'Rain':
+            skyColor = 'gray';
+            skyImage = 'weather-rain';
+            break;
+        case 'Snow':
+            skyColor = 'white';
+            skyImage = 'weather-snow';
+            break;
+        default:
+            skyColor = 'lightBlue';
+            skyImage = 'weather-clear';
+    }
+    // console.log(myWeather);
+    $('body').css('background-color', `${skyColor}`);
+    $('#weather').addClass(`${skyImage}`);
 
     //click donni to start and to jump
     document.getElementById('donniRex').onclick = function(e){
@@ -18,6 +43,7 @@ function playDonnisaur() {
         $('#titlesaur').addClass('d-none');
         $('#clickDon').addClass('d-none');
         $('#titlesaur').removeClass('d-inline-block');
+
         // if (e.keyCode == 32 && isMoving){
         if (isMoving){
             if (!isJumping) {
@@ -26,14 +52,12 @@ function playDonnisaur() {
                 jump();
             }
         } else {
-            if (!isMoving) {
-                over.addClass('d-none');
-                isMoving = true;
-                makeHurdles();
-            }
+            isMoving = true;
+            console.log('ismoving');
+            makeHurdles();
         }
     }
-
+    // jump
     let donniPosition = 0;
     function jump() {
         let count = 0;
@@ -61,7 +85,8 @@ function playDonnisaur() {
         }, 10)
     }
 
-    let score = 0; //start score at 0
+    // keep score
+    let score = 0; 
     function makeHurdles() {
         // generate hurdle divs randomly
         let randoTime = Math.random() * 9000;
@@ -78,9 +103,9 @@ function playDonnisaur() {
             // if donni and hurdle are in the same place at same time, end game
             if (hurdlePosition > 0 && hurdlePosition < 60 && donniPosition < 60) {
                 clearInterval(setTimer);
-                over.html('Game Over');
-                over.removeClass('d-none');
-                over.addClass('over');
+                isOver.html('Game Over');
+                isOver.removeClass('d-none');
+                isOver.addClass('over');
                 $('#weatherSection').addClass('d-none');
                 // $playagainButton.removeClass('d-none');
                 // $playagainButton.addClass('d-block');
@@ -100,33 +125,6 @@ function playDonnisaur() {
             hurdlePosition -= 5;
             hurdle.style.left = hurdlePosition + 'px';
         }, 20)  
-
-        // change background based on weather. default to 'Clear' if value missing
-        var skyColor;
-        var skyImage;
-        if (!gameOver) {
-            // myWeather = 'Rain';
-            switch(myWeather) {
-                case 'Clouds':
-                    skyColor = 'blue';
-                    skyImage = 'weather-clouds';
-                    break;
-                case 'Rain':
-                    skyColor = 'gray';
-                    skyImage = 'weather-rain';
-                    break;
-                case 'Snow':
-                    skyColor = 'white';
-                    skyImage = 'weather-snow';
-                    break;
-                default:
-                    skyColor = 'lightBlue';
-                    skyImage = 'weather-clear';
-            }
-            setTimeout(makeHurdles, randoTime);
-        }
-        // console.log(myWeather);
-        $('body').css('background-color', `${skyColor}`);
-        $('#weather').addClass(`${skyImage}`);
+        setTimeout(makeHurdles, randoTime);
     }
 }
