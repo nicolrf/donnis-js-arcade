@@ -4,8 +4,7 @@ $(document).ready(function () {
     const $home = $('#home');
     const $guesswoof = $('#guesswoof');
     const $donnisaur = $('#donnisaur');
-    var myWeather;
-
+   
     // nav buttons
     $home.on('click', function() {
         location.reload();
