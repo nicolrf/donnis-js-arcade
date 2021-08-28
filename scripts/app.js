@@ -1,10 +1,10 @@
 $(document).ready(function () {
     console.log('arcade loaded');
-
     const $mainContainer = $('#main-container');
     const $home = $('#home');
     const $guesswoof = $('#guesswoof');
     const $donnisaur = $('#donnisaur');
+    var myWeather;
 
     // nav buttons
     $home.on('click', function() {
@@ -16,7 +16,6 @@ $(document).ready(function () {
         console.log('guesswoof game selected');
         $mainContainer.addClass('d-none');
         $guesswoof.removeClass('d-none');
-        $userInfo.addClass('d-none');
     });
 
     //select donnisaur 
@@ -27,4 +26,16 @@ $(document).ready(function () {
         $('#clickDon').html('Click DonniSaur to start and to jump');
         playDonnisaur();
     });
+
+    // $('#playagain').on('click', function() {
+    //     console.log('clicked play again');
+    //     location.reload();
+
+    // });
+    //     then
+    //     $('#guess').click();
+    //     mainContainer.addClass('d-none');
+    //     $guesswoof.removeClass('d-none');
+    //     $('.guess-form').removeClass('d-none');
+    //     $('.guess-bk').addClass('d-none');
 });

@@ -1,24 +1,23 @@
 ///////////// donnisaur game /////////////
 function playDonnisaur() {
     const $donniRex = $('#donniRex');
+    const $donniarea = $('.donniarea');
     const donniarea = document.querySelector('.donniarea');
+    const body = document.querySelector('body');
     const isOver = $('#over');
-    let isJumping = false;
-    let isMoving = false;
+    let hasStarted = false;
     let backdown = .9;
     let gameOver = false;
-    //weather backgrounds
-    let myLoc = '';
-    let myWeather = '';
-    let myTemp = '';
+    // weather backgrounds
     var skyColor;
     var skyImage;
 
     // change background based on weather. 
     // default to 'Clear' if value missing (todo: keys)
+    console.log(myWeather);
     switch(myWeather) {
         case 'Clouds':
-            skyColor = 'blue';
+            skyColor = 'gray';
             skyImage = 'weather-clouds';
             break;
         case 'Rain':
@@ -33,83 +32,79 @@ function playDonnisaur() {
             skyColor = 'lightBlue';
             skyImage = 'weather-clear';
     }
-    // console.log(myWeather);
+    console.log(skyColor);
     $('body').css('background-color', `${skyColor}`);
     $('#weather').addClass(`${skyImage}`);
 
     //click donni to start and to jump
-    document.getElementById('donniRex').onclick = function(e){
-        console.log('pressed');
+    $donniRex.on('click', function() {
         $('#titlesaur').addClass('d-none');
         $('#clickDon').addClass('d-none');
         $('#titlesaur').removeClass('d-inline-block');
-
-        // if (e.keyCode == 32 && isMoving){
-        if (isMoving){
-            if (!isJumping) {
-                isJumping = true;
-                console.log('pressed');
-                jump();
-            }
+        // if first click, start hurdles
+        if (hasStarted){
+            console.log('clicked jump');
+            donniJump();
         } else {
-            isMoving = true;
-            console.log('ismoving');
+            hasStarted = true;
+            donniJump();
             makeHurdles();
         }
-    }
-    // jump
+    });
+    // jump Donni
     let donniPosition = 0;
-    function jump() {
-        let count = 0;
-        let upTimer = setInterval(function() {
-            //come back down after count = 15
-            if (count === 15) {
-                clearInterval(upTimer);
-                let downsetTimer = setInterval(function() {
-                    if (count === 0) {
-                        clearInterval(downsetTimer);
-                        isJumping = false;
+    function donniJump() {
+        let counter = 0;
+        let goingUp = setInterval(function() {
+            //come back down when count = 5
+            if (counter === 5) {
+                clearInterval(goingUp);
+                let comingDown = setInterval(function() {
+                    if (counter === 0) {
+                        clearInterval(comingDown);
                     }
-                    donniPosition -= 7;
-                    count --;
-                    donniPosition = donniPosition * backdown;
-                    $donniRex.css({bottom: donniPosition + 'px'});
-                // how fast should donni move down
-                }, 30)
+                    donniPosition -= 28;
+                    counter --;
+                    console.log(counter);
+                    donniPosition *= backdown;
+                    $donniRex.css({bottom: donniPosition + 'px'})
+                // how fast should donni come down
+                }, 50)
             }
-            donniPosition += 35;
-            count++;
-            donniPosition = donniPosition * backdown;
-            $donniRex.css({bottom: donniPosition + 'px'});
-        // how fast should donni move up
-        }, 10)
+            donniPosition += 60;
+            counter ++;
+            console.log(counter);
+            donniPosition *= backdown;
+            $donniRex.css({bottom: donniPosition + 'px'})
+        // how fast should donni go up
+        }, 40)
     }
-
     // keep score
     let score = 0; 
-    function makeHurdles() {
+    function makeHurdles(){
+        console.log('making hurdle')
         // generate hurdle divs randomly
-        let randoTime = Math.random() * 9000;
-        let hurdlePosition = 1600; //way over to the right
+        let randoTime = Math.random() * 5000;
+        let hurdlePosition = 1000; //way over to the right
         let hurdle = document.createElement('div');
         if (!gameOver) {
             // add class that contains the hurdle image while game is still going
             hurdle.classList.add('hurdle');
+            donniarea.appendChild(hurdle);
+            hurdle.style.left = hurdlePosition + 'px';
+            console.log(hurdlePosition);
         }
-        donniarea.appendChild(hurdle);
-        hurdle.style.left = hurdlePosition + 'px';
-
-        let setTimer = setInterval(function() {
+        let hurdleTimer = setInterval(function() {
             // if donni and hurdle are in the same place at same time, end game
             if (hurdlePosition > 0 && hurdlePosition < 60 && donniPosition < 60) {
-                clearInterval(setTimer);
+                clearInterval(hurdleTimer);
                 isOver.html('Game Over');
                 isOver.removeClass('d-none');
                 isOver.addClass('over');
-                $('#weatherSection').addClass('d-none');
+                gameOver = true;
                 // $playagainButton.removeClass('d-none');
                 // $playagainButton.addClass('d-block');
-                gameOver = true;
+
                 // everything disappears at gameover
                 while (donniarea.firstChild) {
                     donniarea.removeChild(donniarea.lastChild);
@@ -122,9 +117,13 @@ function playDonnisaur() {
                 $('#taco img').fadeTo("slow", 0.0);
             }
             // increase this number to speed up hurdles
-            hurdlePosition -= 5;
+            hurdlePosition -=10;
             hurdle.style.left = hurdlePosition + 'px';
-        }, 20)  
-        setTimeout(makeHurdles, randoTime);
+        }, 30)
+        if (!gameOver) {
+            setTimeout(makeHurdles, randoTime);
+        }
     }
 }
+
+    

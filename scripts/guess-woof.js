@@ -1,6 +1,5 @@
 ////// guess woof game ///////////
 $(document).ready(function () {
-    let $finalResponse = $('.final');
     let $winOrLoseDisplay = $('.guess-bk');
     let $guessInput = $("#guessInput");
     let $finalInput = $("#finalInput");
@@ -91,6 +90,7 @@ $(document).ready(function () {
             let winlose = `<div class='m-auto'><h3>Nope, it's not ${finalInput}.<br>The correct dog was ${secretDog.name}.<br> Game Over :(</h3></div>`;
             $winOrLoseDisplay.html(winlose).css('height', '300px').removeClass('guess-bk');
         }
+        $('#playagain').removeClass('d-none');
         $('.guess-form').addClass('d-none');
     });
 
