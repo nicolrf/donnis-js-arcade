@@ -46,6 +46,11 @@
                                 <h5>DonniSaur</h5>
                             </button>
                         </div>
+                       <!--  <div class="col bk-gray">
+                            <button class="button-blue game-titles m-2" id="pong">
+                                <h5>DonniPong</h5>
+                            </button>
+                        </div> -->
                         <div class="col bk-gray">
                             <button class="button-blue btn-secondary disabled game-titles m-2" id="pong">
                                 <h5>DonniPong<br><span class=font-italic>Coming Soon</span></h5>
@@ -121,8 +126,7 @@
             <div class="score-board p-3 float-left">
                 <h4 class="points outline">Score: 0</h4>
             </div>
-            <!-- display weather based on geolocation -->
-            <!-- todo: use keys -->
+            <!-- display weather based on geolocation todo: keys-->
             <div id="weatherSection"class="float-right d-none">
                 <div class="weather-box d-sm-block d-none p-3">
                     <h4 id="location" class="pink outline mb-0">Current Weather</h4>
@@ -131,10 +135,12 @@
                     <div id="pic"></div>
                 </div>
             </div>
+            <!-- background -->
             <div id="weather" class="mt-4">
                 <h2 class="text-center px-3 yellow outline" id="over"></h2>
+                <div id="wow" class="mt-4"></div>
             </div>
-
+            <!-- donni and tacos -->
             <div class="donniarea">
                 <div id="taco"></div>
                 <div id="donniRex">
@@ -142,6 +148,12 @@
                 </div>
             </div>
         </div><!-- end donnisaur game -->
+
+        <div id="pong" class="d-none">
+            <div>
+                <p>heyyy pong</p>
+            </div>
+        </div>
 
         <!-- /// scripts -->
         <!-- jQuery -->

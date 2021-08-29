@@ -61,8 +61,9 @@ function playDonnisaur() {
     let score = 0; 
     function makeHurdles(){
         console.log('making hurdle')
-        // generate hurdle divs randomly
-        let randoTime = Math.random() * 5000;
+        // generate hurdle divs randomly (minimum 1000 to control frequency)
+        let randoTime = Math.random() * (4000 - 1000) + 1000;
+        console.log(randoTime)
         let hurdlePosition = 1000; //way over to the right
         let hurdle = document.createElement('div');
         if (!gameOver) {
@@ -92,6 +93,18 @@ function playDonnisaur() {
                 $('#taco').html(`<img class="tacos" src="img/taco.png">`);
                 $('.points').html(`<h4 class="outline pink">Score:<span class="green"> ${score}</span</h4><img class="taco-score" src="img/taco.png">`)
                 $('#taco img').fadeTo("slow", 0.0);
+                // console.log(score)
+                if (score === 20) {
+                    $('.score-board').css({backgroundColor: '#ff80ed'});
+                } else if (score === 40) {
+                    $('.score-board').css({backgroundColor: '#ff7f00'});
+                } else if (score === 60) {
+                    $('.score-board').css({backgroundColor: '#adff2f'});
+                } else if (score >= 80){
+                    $('.score-board').css({backgroundColor: '#ffff00'});
+                    // $('#wow').html(`<h1 class="text-center px-3 outline wow">WOW!</h1>`);
+                    // $('#wow h1').fadeTo("slow", 0.0);
+                }
             }
             // increase this number to speed up hurdles
             hurdlePosition -= 6;
@@ -101,6 +114,5 @@ function playDonnisaur() {
             setTimeout(makeHurdles, randoTime);
         }
     }
-}
-
     
+}   

@@ -4,6 +4,7 @@ $(document).ready(function () {
     const $home = $('#home');
     const $guesswoof = $('#guesswoof');
     const $donnisaur = $('#donnisaur');
+    const $pong = $('#pong');
     
     // nav buttons
     $home.on('click', function() {
@@ -22,6 +23,12 @@ $(document).ready(function () {
         $donnisaur.removeClass('d-none');
         $('#clickDon').html('Click DonniSaur to start and to jump');
         playDonnisaur();
+    });
+    //select guess woof
+    $('#pong').on('click', function() {
+        // console.log('pong game selected');
+        // $mainContainer.addClass('d-none');
+        // $pong.removeClass('d-none');
     });
     // $('#playagain').on('click', function() {
     //     console.log('clicked play again');
