@@ -8,7 +8,7 @@ function playDonnisaur() {
     let hasStarted = false;
     let backdown = .9;
     let gameOver = false;
-    
+
     // default background (sans weather api)
     $('body').css('background-color', 'lightBlue');
     $('#weather').addClass('weather-clear');
@@ -94,7 +94,7 @@ function playDonnisaur() {
                 $('#taco img').fadeTo("slow", 0.0);
             }
             // increase this number to speed up hurdles
-            hurdlePosition -=10;
+            hurdlePosition -= 6;
             hurdle.style.left = hurdlePosition + 'px';
         }, 30)
         if (!gameOver) {
