@@ -17,7 +17,7 @@ $(document).ready(function () {
     });
     //select donnisaur 
     $('#donni').on('click', function() {
-        console.log('donnisaur game selected');
+        console.log('donnisaur game selected :) Hi!');
         $mainContainer.addClass('d-none');
         $donnisaur.removeClass('d-none');
         $('#clickDon').html('Click DonniSaur to start and to jump');
