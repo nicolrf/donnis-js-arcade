@@ -8,35 +8,10 @@ function playDonnisaur() {
     let hasStarted = false;
     let backdown = .9;
     let gameOver = false;
-    // weather backgrounds
-   var myWeather;
-  var skyColor;
-  var skyImage;
-
-  // change background based on weather. 
-  // default to 'Clear' if value missing (todo: keys)
-  console.log(myWeather);
-  switch(myWeather) {
-      case 'Clouds':
-          skyColor = 'gray';
-          skyImage = 'weather-clouds';
-          break;
-      case 'Rain':
-          skyColor = 'gray';
-          skyImage = 'weather-rain';
-          break;
-      case 'Snow':
-          skyColor = 'white';
-          skyImage = 'weather-snow';
-          break;
-      default:
-          skyColor = 'lightBlue';
-          skyImage = 'weather-clear';
-  }
-  console.log(skyColor);
-  $('body').css('background-color', `${skyColor}`);
-  $('#weather').addClass(`${skyImage}`);
-
+    
+    // default background (sans weather api)
+    $('body').css('background-color', 'lightBlue');
+    $('#weather').addClass('weather-clear');
 
     //click donni to start and to jump
     $donniRex.on('click', function() {

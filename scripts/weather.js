@@ -6,6 +6,10 @@
   let $temp = $('#temp');
   let $main = $('#main');
   let $pic = $('#pic');
+  // weather backgrounds for donnisaur
+  var myWeather;
+  var skyColor;
+  var skyImage;
 
   navigator.geolocation.getCurrentPosition(function (position) {
     // console.log('lat: ' + position.coords.latitude);
@@ -24,6 +28,30 @@
               response.weather[0].main, 
               response.weather[0].icon);
               $('#weatherSection').removeClass('d-none');
+
+              // change donnisaur background based on weather. 
+              // default to 'Clear' if value missing (todo: keys)
+              console.log(myWeather);
+              switch(myWeather) {
+                  case 'Clouds':
+                      skyColor = 'gray';
+                      skyImage = 'weather-clouds';
+                      break;
+                  case 'Rain':
+                      skyColor = 'gray';
+                      skyImage = 'weather-rain';
+                      break;
+                  case 'Snow':
+                      skyColor = 'white';
+                      skyImage = 'weather-snow';
+                      break;
+                  default:
+                      skyColor = 'lightBlue';
+                      skyImage = 'weather-clear';
+              }
+              console.log(skyColor);
+              $('#weather').css('background-color', `${skyColor}`);
+              $('#weather').addClass(`${skyImage}`);
         },
         error: function() {
           apiError();
