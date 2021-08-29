@@ -33,28 +33,29 @@ function playDonnisaur() {
     function donniJump() {
         let counter = 0;
         let goingUp = setInterval(function() {
-            //come back down when count = 5
-            if (counter === 5) {
+            //come back down when count = 6 (how high)
+            if (counter === 6) {
                 clearInterval(goingUp);
                 let comingDown = setInterval(function() {
                     if (counter === 0) {
                         clearInterval(comingDown);
                     }
-                    donniPosition -= 28;
+                    donniPosition -= 25;
                     counter --;
-                    console.log(counter);
+                    console.log(`counter: ${counter}`);
+                    console.log(`position: ${donniPosition}`);
                     donniPosition *= backdown;
                     $donniRex.css({bottom: donniPosition + 'px'})
-                // how fast should donni come down
-                }, 50)
+                // how fast should donni come down (increase to slow down)
+                }, 70)
             }
             donniPosition += 60;
             counter ++;
-            console.log(counter);
+            // console.log(counter);
             donniPosition *= backdown;
             $donniRex.css({bottom: donniPosition + 'px'})
-        // how fast should donni go up
-        }, 40)
+        // how fast should donni go up (increase to slow down)
+        }, 20)
     }
     // keep score
     let score = 0; 
@@ -69,7 +70,6 @@ function playDonnisaur() {
             hurdle.classList.add('hurdle');
             donniarea.appendChild(hurdle);
             hurdle.style.left = hurdlePosition + 'px';
-            console.log(hurdlePosition);
         }
         let hurdleTimer = setInterval(function() {
             // if donni and hurdle are in the same place at same time, end game
