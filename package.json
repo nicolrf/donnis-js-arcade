@@ -1,9 +1,9 @@
 {
+  "scripts": {
+  "start": "node app.js"
+},
   "name": "donnis-js-arcade",
   "private": true,
   "dependencies": {}
 }
 
-"scripts": {
-  "start": "node index.js"
-}
